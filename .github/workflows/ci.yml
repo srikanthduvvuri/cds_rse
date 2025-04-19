@@ -25,8 +25,10 @@ jobs:
       run: |
         pip install -r requirements.txt
     - name: Start Services
-      run: docker compose -f cds_rse/cds_rse/docker-compose.yml up -d
-      working-directory: ${{ github.workspace }}
+      run: |
+        cd $(git rev-parse --show-toplevel)
+        docker compose -f docker-compose.yml up -d
+      
       
     - name: Wait for MongoDB to be ready  
       run: |
