@@ -24,9 +24,21 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+    - name: Start Services
+      run: |
+        docker-compose up -d
+    - name: Wait for MongoDB to be ready  
+      run: |
+        until nc -z localhost 27017; do
+          echo "Waiting for MongoDB..."
+          sleep 5
+        done  
     - name: Run unit tests
       run: |
         pytest
     - name: Run BDD tests
       run: |
         behave features/
+    - name: Tear down
+      run: |
+        docker-compose down   
