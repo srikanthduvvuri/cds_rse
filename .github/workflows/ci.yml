@@ -24,8 +24,8 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-        - name: Run unit tests
-        run: |
+    - name: Run unit tests
+      run: |
           pytest
     - name: Start Services
       run: |
