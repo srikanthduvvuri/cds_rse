@@ -26,8 +26,7 @@ jobs:
         pip install -r requirements.txt
     - name: Start Services
       run: |
-        cd ../../..
-        docker compose up -d
+        docker compose -f ../../docker-compose.yml up -d
     - name: Wait for MongoDB to be ready  
       run: |
         until nc -z localhost 27017; do
